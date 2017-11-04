@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Update student</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+	<h1 class="page-header">Problem Editor</h1>
+
+	<form action="#" th:action="@{/student/updateObject/submit}" th:object="${student}" method="post">
+		<div>
+			 <p>NPM: <input type="text" readonly = "true" th:field="*{npm}" /></p>
+		</div>
+		<div>
+			<p>Name: <input type = "text"  th:field="*{name}" /></p>
+		</div>
+		<div>
+			<p>GPA: <input type = "text"  th:field="*{gpa}" /></p>
+		</div>
+
+		<div>
+			<button type="submit" name="action" value="save">Update</button>
+		</div>
+	</form>
+
+</body>
+
+</html>
+
