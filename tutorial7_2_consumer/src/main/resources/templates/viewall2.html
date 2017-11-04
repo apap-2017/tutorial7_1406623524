@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View All Students</title>
+</head>
+<body>
+	<h1>All Students</h1>
+
+	<div th:each="student,iterationStatus:${students}" th:class="${iterationStatus.odd}? 'odd'">
+		<h3 th:text ="'NPM='+${student.npm}">StudentNPM</h3>
+		<h3 th:text="'Name='+${student.name}">StudentName</h3>
+		<h3 th:text="'GPA='+${student.gpa}">StudentGPA</h3>
+		<h3 th:if="${student.gpa>=3.49}">Cum Laude</h3>
+		<h3 th:unless="${student.gpa>=3.49}">Sangat Memuaskan</h3>
+		
+			
+			<h3>Kuliah yang diambil</h3>
+			<ul th:each="course,iterationStatus:${student.courses}">
+				<li th:text="${course.name}+'-'+${course.credits} + ' sks'">
+					Nama kuliah - X SKS</li>
+			</ul>
+
+			<a th:href="'/student/delete/' + ${student.npm}"> Delete Data </a>
+			<br />
+			<a th:href="'/student/update/' + ${student.npm}"> Update Data </a>
+			<br />
+			<a th:href="'/student/updateObject/' + ${student.npm}"> Update Data Object </a>
+			<br />
+			<hr />
+	</div>
+</body>
+</html>

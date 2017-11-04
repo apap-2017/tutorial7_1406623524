@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<div th:replace="fragments/base-view  :: CSS"></div>
+</head>
+
+<body>
+<div th:replace="fragments/base-view :: header"></div>
+	<table class="table table-bordered" id="mytable">
+		<thead>
+			<tr class="active">
+				<th class="text-center">No</th>
+				<th class="text-center">NPM</th>
+				<th class="text-center">Nama</th>
+				<th class="text-center">GPA</th>
+				<th class="text-center">Status Kelulusan</th>
+				<th class="text-center">Matkul yang diambil</th>
+				<th class="text-center">Update</th>
+				<th class="text-center">Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="student, iterationStatus: ${students}">
+				<th class="text-center" th:text="${iterationStatus.count}">no.1</th>
+				<th class="text-center" th:text="${student.npm}">NPM</th>
+				<th class="text-center" th:text="${student.name}">Nama</th>
+				<th class="text-center" th:text="${student.gpa}">GPA</th>
+				<th class="text-center" th:if="${student.gpa>=3.49}">Cum Laude!</th>
+				<th class="text-center" th:unless="${student.gpa}>=3.49">Sangat
+					Memuaskan</th>
+				<th class="text-center">	
+				<ul th:each="course,iterationStatus:${student.courses}">
+				<li th:text="${course.name}+'-'+${course.credits} + ' sks'">
+					Nama kuliah - X SKS</li>
+				</ul>	
+				</th>
+				<th class="text-center"><a class="btn btn-warning"
+					th:href="'/student/update/' + ${student.npm}">Update</a></th>
+				<th class="text-center"><a class="btn btn-danger"
+					th:href="'/student/delete/' + ${student.npm}">Delete</a></th>
+			</tr>
+		</tbody>
+	</table>
+	<script type="text/javascript">
+	$(document).ready(function () {
+        $('#mytable').DataTable();
+    });
+	</script>
+</body>
+</html>

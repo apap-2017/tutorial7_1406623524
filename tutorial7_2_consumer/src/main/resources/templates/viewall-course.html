@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<div th:replace="fragments/base-view  :: CSS"></div>
+</head>
+
+<body>
+	<div th:replace="fragments/base-view :: header"></div>
+	<table class="table table-bordered" id="mytable">
+		<thead>
+			<tr class="active">
+				<th class="text-center">No</th>
+				<th class="text-center">ID Course</th>
+				<th class="text-center">Nama</th>
+				<th class="text-center">Student yang mengambil</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="course, iterationStatus: ${courses}">
+				<th class="text-center" th:text="${iterationStatus.count}">no.1</th>
+				<th class="text-center" th:text="${course.idCourse}">idCourse</th>
+				<th class="text-center" th:text="${course.name}">Nama</th>
+				<th><ul th:each="student,iterationStatus:${course.students}">
+						<li th:text="${student.npm}+'-'+${student.name}">Nama kuliah
+							- X SKS</li>
+					</ul></th>
+			</tr>
+		</tbody>
+	</table>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#mytable').DataTable();
+		});
+	</script>
+</body>
+</html>
